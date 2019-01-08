@@ -3,49 +3,32 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Lockscreen</title>
-    <!-- Tell the browser to be responsive to screen width -->
+    <title>Registro de Entradas y Salidas</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-    <!-- Ionicons -->
     <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
-    <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <link rel="stylesheet" href="css/index.css">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition lockscreen">
-<!-- Automatic element centering -->
 <div class="lockscreen-wrapper">
     <div class="lockscreen-logo">
-        <b>Admin</b>LTE
+        <p><b>{{ \Carbon\Carbon::now()->format('h:i') }}</b></p>
     </div>
-    <!-- User name -->
-    <div class="lockscreen-name">John Doe</div>
-
-    <!-- START LOCK SCREEN ITEM -->
+    <div class="lockscreen-name">{{ \Carbon\Carbon::now()->format('d-m-Y') }}</div>
     <div class="lockscreen-item">
-        <!-- lockscreen image -->
         <div class="lockscreen-image">
-            <img src="../../dist/img/user1-128x128.jpg" alt="User Image">
+            <img src="dist/img/avatar5.png" alt="User Image">
         </div>
-        <!-- /.lockscreen-image -->
-
-        <!-- lockscreen credentials (contains the form) -->
         <form class="lockscreen-credentials">
             <div class="input-group">
-                <input type="password" id="matricula" class="form-control" placeholder="password">
+                <input type="password" id="matricula" class="form-control" autofocus placeholder="Matrícula">
                 <input type="hidden" id="token" value="{{ csrf_token() }}">
 
                 <div class="input-group-btn">
@@ -53,49 +36,35 @@
                 </div>
             </div>
         </form>
-        {{--<!-- /.lockscreen credentials -->--}}
+    </div>
+
+    <div id="info" class="box box-widget widget-user-2">
+        <div class="widget-user-header bg-yellow">
+            <div class="widget-user-image">
+                <img id="profile-picture" class="img-circle" src="../dist/img/user7-128x128.jpg" alt="User Avatar">
+            </div>
+            <h3 class="widget-user-username"></h3>
+            <h5 class="widget-user-desc"></h5>
+        </div>
 
     </div>
-    <!-- /.lockscreen-item -->
-    <div class="help-block text-center">
-        Ingresa tu matrícula para registrar tu entrada.
+    <div id="success" class="alert alert-success" role="alert"></div>
+    <div id="fail" class="alert alert-danger" role="alert"></div>
+
+    <div class="help-block text-center login_help">
+        Ingrese su matrícula para guardar su registro.
     </div>
     <div class="text-center">
-        <a href="login">Iniciar como administrador</a>
+        <a href="login">Iniciar sesión</a>
     </div>
     <div class="lockscreen-footer text-center">
-        Copyright &copy; {{ date('Y') }} <b><a href="https://adminlte.io" class="text-black">Jonathan Orta</a></b><br>
+        Copyright &copy; {{ date('Y') }} <b>Jonathan Orta</b><br>
         Code Solutions Systems
     </div>
 </div>
-<!-- /.center -->
 
-<!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<script>
-    $(function () {
-        $('#matricula').on('keydown',function (e) {
-            if(event.keyCode === 13) {
-                event.preventDefault();
-                check();
-                return false;
-            }
-        })
-    });
-    function check() {
-        var user = $('#matricula').val();
-        var token = $('#token').val();
-        $.post('check', {user: user, _token: token})
-        .done(function() {
-        })
-        .fail(function() {
-        })
-        .always(function() {
-        });
-    }
-</script>
+<script src="js/index.js"></script>
 </body>
 </html>

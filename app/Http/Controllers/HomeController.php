@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use App\Movement;
 use App\User;
 use Carbon\Carbon;
@@ -44,6 +45,7 @@ class HomeController extends Controller
             'user' => [],
         ];
         if ($user = User::where('clave',$request->get('user'))->first()){
+            $user->department = Department::find($user->dpto)->nombre;
             $move = Movement::where('user',$user->id)->where('checkin','>',$day)->orderBy('id','desc')->first();
             if(!$move){
                 $response['user'] = $user;
@@ -59,6 +61,7 @@ class HomeController extends Controller
                     }
                     else{
                         if (Movement::where('id',$move->id)->update(['checkout' => $now, 'outip' => 0])) {
+                            $response['user'] = $user;
                             $response['status'] = 'success';
                             $response['message'] = 'Se ha registrado su salida exitosamente.';
                         }
@@ -68,6 +71,9 @@ class HomeController extends Controller
                     $response['message'] = 'Ya ha registrado sus dos movimientos del día de hoy.';
                 }
             }
+        }
+        else{
+            $response['message'] = 'El usuario no se encuentra registrado.';
         }
 
         return $response;

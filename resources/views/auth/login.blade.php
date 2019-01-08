@@ -1,7 +1,52 @@
-@extends('layouts.app')
+@extends('auth.auth')
+
+@section('title')
+    Inicio de Sesión
+@endsection
 
 @section('content')
-<div class="container">
+    <div class="login-box">
+        <div class="login-logo"><a href="/"><b>Registro de Entradas y Salidas</b></a></div>
+        <div class="login-box-body">
+            <p class="login-box-msg">Ingrese sus datos para iniciar sesión</p>
+
+            <form action="{{ route('login') }}" method="post">
+                <div class="form-group has-feedback">
+                    <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" required autofocus placeholder="Correo">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    @if ($errors->has('email'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group has-feedback">
+                    <input type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Contraseña">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    @if ($errors->has('password'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Iniciar Sesión</button>
+                    </div>
+                </div>
+                @csrf
+            </form>
+
+            @if (Route::has('password.request'))
+                {{--<a href="{{ route('password.request') }}">I forgot my password</a><br>--}}
+            @endif
+
+            <a href="register" class="text-center">Registrarse</a>
+
+        </div>
+    </div>
+{{--<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -69,5 +114,5 @@
             </div>
         </div>
     </div>
-</div>
+</div>--}}
 @endsection

@@ -15,10 +15,12 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $table = 'usuarios';
+    protected $table = 'users';
+
+    public $timestamps = false;
 
     protected $fillable = [
-        'nombre', 'clave', 'dpto', 'tipo',
+        'nombre', 'clave', 'dpto', 'tipo', 'email', 'password', 'key', 'img', 'type'
     ];
 
     /**
@@ -27,6 +29,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'clave',
+        'clave', 'password'
     ];
 }

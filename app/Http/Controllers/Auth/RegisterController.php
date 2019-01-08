@@ -51,7 +51,10 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'password' => ['required', 'string', 'min:2', 'confirmed'],
+            'tipo' => ['required'],
+            'departamento' => ['required'],
+            'matricula' => ['required']
         ]);
     }
 
@@ -63,10 +66,33 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if($user = User::where('clave',$data['matricula'])->first()){
+            if(User::where('id',$user->id)->update([
+                'nombre' => $data['name'],
+                'clave' => $data['matricula'],
+                'dpto' => $data['departamento'],
+                'tipo' => $data['tipo'],
+                'type' => 2,
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'key' => base64_encode($data['password']),
+                'img' => 'default',
+                'verified' => 1
+            ])){
+                return User::where('clave',$data['matricula'])->first();
+            }
+        }
+
         return User::create([
-            'name' => $data['name'],
+            'nombre' => $data['name'],
+            'clave' => $data['matricula'],
+            'dpto' => $data['departamento'],
+            'tipo' => $data['tipo'],
+            'type' => 2,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'key' => base64_encode($data['password']),
+            'img' => 'default',
         ]);
     }
 }

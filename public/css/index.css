@@ -1,0 +1,28 @@
+.lockscreen{
+    overflow: hidden;
+    background-size: cover;
+    background: white url('../img/background.jpg') no-repeat fixed center;
+    color: white;
+}
+
+.lockscreen-logo{font-size:45px;}
+
+.login_link, .login_link:visited{
+    color: white;
+}
+
+.login_link:hover{
+    color: #e7e7e7;
+}
+
+.login_help{
+    color: yellow;
+}
+
+.alert{
+    display: none;
+}
+
+.box{
+    display: none;
+}
