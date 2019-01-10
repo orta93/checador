@@ -41,7 +41,7 @@
     <div id="info" class="box box-widget widget-user-2">
         <div class="widget-user-header bg-yellow">
             <div class="widget-user-image">
-                <img id="profile-picture" class="img-circle" src="../dist/img/user7-128x128.jpg" alt="User Avatar">
+                <img id="profile-picture" class="img-circle" src="{{ asset('/storage/images/default.png') }}" alt="User Avatar">
             </div>
             <h3 class="widget-user-username"></h3>
             <h5 class="widget-user-desc"></h5>

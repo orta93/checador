@@ -42,7 +42,7 @@ function closeAlerts(response) {
 }
 
 function showUser(user) {
-    $('#profile-picture').attr('src',user.picture);
+    $('#profile-picture').attr('src',user.img);
     $('.widget-user-username').html(user.nombre);
     $('.widget-user-desc').html(user.department);
     $('#info').fadeIn();
