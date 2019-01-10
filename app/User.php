@@ -31,4 +31,8 @@ class User extends Authenticatable
     protected $hidden = [
         'clave', 'password'
     ];
+
+    public function getDepartmentAttribute(){
+        return Department::find($this->dpto)->nombre;
+    }
 }

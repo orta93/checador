@@ -30,11 +30,6 @@ class HomeController extends Controller
         return view('index');
     }
 
-    public function home()
-    {
-        return view('home');
-    }
-
     public function check(Request $request)
     {
         $day = Carbon::now()->setTime(0,0,0)->timestamp;
