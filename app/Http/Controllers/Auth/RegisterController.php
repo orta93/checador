@@ -76,7 +76,7 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'key' => base64_encode($data['password']),
-                'img' => 'default',
+                'img' => '/storage/images/default.png',
                 'verified' => 1
             ])){
                 return User::where('clave',$data['matricula'])->first();
