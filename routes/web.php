@@ -20,3 +20,7 @@ Route::post('/check', 'HomeController@check');
 Route::get('/home', 'AppController@index')->name('index');
 Route::get('/profile', 'AppController@profile')->name('profile');
 Route::post('/profile', 'AppController@submitProfile')->name('submitProfile');
+
+Route::get('/checador', function(){
+ return redirect()->to('/');
+});
