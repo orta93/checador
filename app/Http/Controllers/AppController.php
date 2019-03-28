@@ -51,7 +51,7 @@ class AppController extends Controller
         $semester->hours = intval($semester->total->seconds / 3600);
         $semester->barWidth = intval($semester->hours / 480 * 100);
 
-        return view('admin')->with([
+        return view('home')->with([
             'movements' => $movements['movements'],
             'total' => $movements['total'],
             'semester' => $semester
