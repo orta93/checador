@@ -33,7 +33,8 @@ class User extends Authenticatable
         'clave', 'password'
     ];
 
-    public function getDepartmentAttribute(){
+    public function getDepartmentAttribute()
+    {
         return Department::find($this->dpto)->nombre;
     }
 }
